@@ -1,0 +1,63 @@
+.movie-card{
+    width: 80%;
+    margin: 0 auto;
+padding-bottom: 10px;
+position: relative;
+
+}
+
+
+.card-container{
+    box-shadow: 0 0 10px 5px rgba(39, 39, 39, 0.349);
+    display: flex;
+    border-radius: 0px 0px 20px 20px;
+
+}
+.movie-title{
+    box-shadow: 0 0 10px 5px rgba(39, 39, 39, 0.349);
+
+    width: 100%;
+    background-color: rgb(29, 29, 29);
+    height: 50px;
+    margin-bottom: 0;
+    border-radius: 10px 10px 0px 0px;
+}
+.title-card{
+    color: rgb(170, 168, 168);
+
+    font-size: 20px;
+    padding: 12px 15px;
+}
+
+.text-card{
+    color: rgb(170, 168, 168);
+font-size: 14px;
+padding: 12px 10px 0 30px;
+margin: 0;
+cursor: default;
+}
+.card-image{
+    width: 190px;
+    height:260px;
+&:hover{
+    transform: scale(1.05);
+    transition: 0.5s;
+    z-index: 2;
+}
+}
+.strong-text{
+    font-size: 18px;
+}
+.subtitle-card{
+    display: -webkit-box;
+-webkit-line-clamp: 5;
+-webkit-box-orient: vertical;
+overflow: hidden;
+height: 88px;
+width: 95%;
+}
+.button-card{
+  position: absolute;
+  right: 50px;
+  bottom: 25px;
+}
