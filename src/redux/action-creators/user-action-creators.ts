@@ -3,6 +3,7 @@ import { IUserData, IAuthorizeData, ISignIn, ITokens } from '../../type';
 import { getActualToken } from "../../utils/getToken";
 import { takeEvery, put } from 'redux-saga/effects'
 
+
 const signUp = (user: IUserData) => {
     return {
         type: SIGN_UP,
@@ -54,8 +55,8 @@ function* getUserData() {
     if (userResp.status === 200) {
         const user: IUserData = yield userResp.json()
         yield put(setUser(user))
-        window.location.pathname='/posts'
-    } 
+        window.location.pathname='/'
+    }
 
 }
 
@@ -63,7 +64,7 @@ function* signUpUser(action: any) {
     const { user } = action
     const URL = `https://studapi.teachmeskills.by/auth/users/`
     const resp: Response = yield fetch(URL, {
-        method: 'POST', 
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -76,7 +77,7 @@ function* signInUser(action: any) {
 
     const URL = `https://studapi.teachmeskills.by/auth/jwt/create/`
     const resp: Response = yield fetch(URL, {
-        method: 'POST', 
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -97,7 +98,7 @@ function* resetUserPassword(action: any) {
     const { email } = action
     const URL = `https://studapi.teachmeskills.by/auth/users/reset_password/`
     const resp: Response = yield fetch(URL, {
-        method: 'POST', 
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -105,13 +106,6 @@ function* resetUserPassword(action: any) {
       });
 }
 
-function* watcherUser(){
-    yield takeEvery(SIGN_UP, signUpUser)
-    yield takeEvery(SIGN_IN, signInUser)
-    yield takeEvery(ACTIVATE, fetchActivate)
-    yield takeEvery(GET_USER, getUserData)
-    yield takeEvery(RESET_PASSWORD, resetUserPassword)
-}
 
 const activate = (auth: IAuthorizeData) => {
     return {
@@ -125,7 +119,7 @@ function* fetchActivate(action: any) {
 
     const URL = `https://studapi.teachmeskills.by/auth/users/activation/`
     const resp: Response = yield fetch(URL, {
-        method: 'POST', 
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -134,27 +128,14 @@ function* fetchActivate(action: any) {
 }
 
 
+function* watcherUser(){
+    yield takeEvery(SIGN_UP, signUpUser)
+    yield takeEvery(SIGN_IN, signInUser)
+    yield takeEvery(ACTIVATE, fetchActivate)
+    yield takeEvery(GET_USER, getUserData)
+    yield takeEvery(RESET_PASSWORD, resetUserPassword)
+}
 
 export { watcherUser, signUp, activate, signIn, setUser, logOut, resetPassword };
 
 
-// {username: "LZ1981", email: "lzolimp1981@gmail.com", id: 6197}
-// email
-// :
-// "lzolimp1981@gmail.com"
-// id
-// :
-// 6197
-// username
-// :
-// "LZ1981"
-
-
-
-// {uid: "NjE5Nw", token: "bnbs5u-6d0b38050d3ff358d25db11781c66e8c"}
-// token
-// : 
-// "bnbs5u-6d0b38050d3ff358d25db11781c66e8c"
-// uid
-// : 
-// "NjE5Nw"

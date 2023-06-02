@@ -8,6 +8,8 @@ import { SideBar } from "./components/SideBar/SideBar";
 import { MainPage } from "./components/MainPage/MainPage";
 import BurgerMenu from "./components/BurgerMenu/BurgerMenu";
 import { SelectedMovie } from "./components/MovieCard/SelectedMovie/SelectedMovie";
+import { SignUpActivation } from "./components/SignUpActivation/SignUpActivation";
+import { SearchPage } from "./components/SearchPage/SearchPage";
 
 function App() {
 	return (
@@ -20,8 +22,11 @@ function App() {
 					<Route path="/movie">
 						<Route path=":movieId" element={<SelectedMovie />} />
 					</Route>
+					<Route path='/search' element={<SearchPage/>} />
 					<Route path="/sign_up" element={<SignUp />} />
 					<Route path="/sign_in" element={<SignIn />} />
+					<Route path='activate/:uid/:token' element={<SignUpActivation/>} />
+
 				</Routes>
 			</BrowserRouter>
 		</div>
@@ -42,3 +47,4 @@ export default App;
 //           <Route path='/sign_up' element={<SignUp />} />
 //           <Route path='activate/:uid/:token' element={<SignUpActivation />} />
 //     </Routes>
+ 

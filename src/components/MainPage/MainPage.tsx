@@ -9,11 +9,14 @@ import { Slider } from "../Slider/Slider";
 import { MovieCard } from "../MovieCard/MovieCard";
 import { mockDataMovie } from "../../constants";
 import { CardsMovies } from "../MovieCard/CardsMovies";
+
+
+
 export const MainPage = (data:any) => {
 	return (
 		<div className="main-container">
             <Slider />
-         <CardsMovies data={mockDataMovie}/>
+         <CardsMovies />
 			{/* <MovieCard movieCard={mockDataMovie} />
 			<MovieCard movieCard={mockDataMovie} />
 			<MovieCard movieCard={mockDataMovie} /> */}
