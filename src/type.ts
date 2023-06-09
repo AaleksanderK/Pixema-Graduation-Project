@@ -12,6 +12,7 @@ export interface IInput {
 	isRequired?: boolean;
 	error?: string;
 	callback: Function;
+	autoComplete?: string,
 }
 export interface IButton {
     className: string,
@@ -28,16 +29,26 @@ export interface IMovieCard {
     release_date: string,
     country: string,
 	genres: IMovieGenres[],
-    overview: string,
+	overview: string,
+	key: string,
+	vote_average:number
+
 }
 export interface IMovieGenres {
+    id?: string | number,
+	name:string
+}
+export interface IMovieCountries {
     id?: string,
 name:string
-
 }
 
 export interface IMovie {
     movieCard: IMovieCard,
+
+}
+export interface IMovieSlider {
+    movieSlide: IMovieCard[],
 
 }
 export interface MoviesProps {
@@ -64,6 +75,7 @@ export interface ISignIn {
 }
 export interface IUserState {
 	authorizedUser: IUserData;
+	favorites: IMovieCard[]
 }
 export interface IStoreState {
 	user: IUserState;
@@ -84,14 +96,36 @@ export interface IIcon {
 
 export interface IMovieResponce {
 	count: number,
-	next : string
-	results: IMovieCard[]
+	next : string,
+	results: IMovieCard[],
+genres:IMovieGenres[]
+popular:IMoviePopular[]
 }
 export interface IMoviesState {
 	movies: IMovieCard[],
+	similarMovies: IMovieCard[],
 	limit: number,
 	selectedPost: IMovieCard,
+	selectedTrailer:IMovieTrailer[],
 	searchQuery: IMovieCard[],
+	search: string,
 	currentPage: number,
 	total: number,
+	genres: IMovieGenres[]
+	selectedGenre?: string,
+	selectedPopular?: string,
+	isLoading: boolean
+}
+
+export interface IMovieTrailer{
+name?:string,
+	key:string
+}
+
+export interface IMoviePopular{
+	id: string,
+	name:string
+}
+export interface IMoviePopularData{
+	data: IMoviePopular[]
 }

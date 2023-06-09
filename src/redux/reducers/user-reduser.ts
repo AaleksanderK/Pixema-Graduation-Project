@@ -1,4 +1,5 @@
-import { LOG_OUT, SET_USER } from "../action-types/user-action-types";
+import { IMovieCard, IUserState } from "../../type";
+import { LOG_OUT, SET_USER, TOGGLE_FAVORITE } from "../action-types/user-action-types";
 
 const initialState = {
 	authorizedUser: {
@@ -6,6 +7,7 @@ const initialState = {
 		email: "",
 		id: "",
 	},
+	favorites: [] as IMovieCard[],
 }
 
 const getInitialState = () => {
@@ -19,7 +21,9 @@ const getInitialState = () => {
 	return initialState
 };
 
-const userReducer = (state = getInitialState(), action: any) => {
+
+
+const userReducer = (state: IUserState = getInitialState(), action: any) => {
 	switch (action.type) {
 		case SET_USER: {
 			const { user } = action;
@@ -39,7 +43,21 @@ const userReducer = (state = getInitialState(), action: any) => {
 				},
 			};
 		}
-		
+		case TOGGLE_FAVORITE: {
+			const { movie } = action;
+            const index = state.favorites?.findIndex(el => el.id === movie.id);
+			const newFavorites = [...state?.favorites] || []
+ 
+            if (index === -1) {
+                newFavorites.push(movie);
+            } else {
+                newFavorites.splice(index, 1);
+            }
+            return {
+                ...state,
+                favorites: newFavorites,
+            }
+        }
 		default: {
 			return state;
 		}

@@ -1,25 +1,21 @@
 import "./mainPage.scss";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-import { Slider } from "../Slider/Slider";
-import { MovieCard } from "../MovieCard/MovieCard";
-import { mockDataMovie } from "../../constants";
 import { CardsMovies } from "../MovieCard/CardsMovies";
+import { SelectGenres } from "../MovieCard/SelectGenres/SelectGenres";
+import { SelectPopular } from "../MovieCard/SelectGenres/SelectPopular";
+import { mockDataPopular } from "../../constants";
 
 
 
-export const MainPage = (data:any) => {
+export const MainPage = () => {
 	return (
 		<div className="main-container">
-            <Slider />
+ 
+			<div className="main-container-select">
+				<SelectGenres />
+			<SelectPopular data={mockDataPopular}/>
+			</div>
          <CardsMovies />
-			{/* <MovieCard movieCard={mockDataMovie} />
-			<MovieCard movieCard={mockDataMovie} />
-			<MovieCard movieCard={mockDataMovie} /> */}
+ 
 		</div>
 	);
 };

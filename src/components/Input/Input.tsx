@@ -13,7 +13,8 @@ export const Input = ({
 	isRequired,
 	error,
     callback,
-    className
+    className,
+
 }: IInput) => {
     const labelComponent = label ? <label className='input__label' htmlFor={name}>{label}</label> : ''
 	return (
@@ -30,7 +31,8 @@ export const Input = ({
             data-valid={isValid}
             required={isRequired}
             disabled={!isEnable}
-            onChange={(e) => { callback(e) }}
+                onChange={(e) => { callback(e) }}
+                autoComplete=''
         />
         <p className='input__error'>
             {error}

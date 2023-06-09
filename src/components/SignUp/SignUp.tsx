@@ -73,7 +73,7 @@ export const SignUp = () => {
 			<Button
 				className={"button button-sign"}
 				content="Sign Up"
-				isActive={true}
+				
 				callback={() => {
 					dispatch(signUp({
 						"username": `${nameText}`,

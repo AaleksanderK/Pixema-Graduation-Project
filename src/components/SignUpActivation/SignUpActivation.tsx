@@ -1,5 +1,5 @@
-import { IStoreState } from "../../type";
-import { useSelector, useDispatch } from "react-redux";
+ 
+import {   useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { activate } from "../../redux/action-creators/user-action-creators";
@@ -16,7 +16,6 @@ export const SignUpActivation = () => {
 			uid: uid,
 			token: token,
 		};
-		console.log(auth);
 		dispatch(activate(auth));
 	}, []);
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import "./header.scss";
 import { Button } from "../Button/Button";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -8,24 +8,33 @@ import { UserAvatar } from "../UserAvatarIcon/UserAvatarIcon";
 import { SearchIcon } from "../Icons/SearchIcon";
 import { logOut } from "../../redux/action-creators/user-action-creators";
 import { setCurrentPage, setSearchValue } from "../../redux/action-creators/movie-action-creators";
+import debounce from "lodash/debounce";
+
 
 export const Header = () => {
 	const dispatch = useDispatch()
     const navigate = useNavigate()
 	const [text, setText] = useState("");
 	const authorizedUserName = useSelector((state: IStoreState) => state.user.authorizedUser.username);
+
+	const getSearch = useCallback(debounce((text) => {
+		dispatch(setSearchValue(text));
+		
+		if (text) {
+			navigate('/search')
+		} else {
+			navigate('/')
+		}
+	}, 400), [])
 	
 	const handleChange = (e: any) => {
+	
 		setText(e.target.value)
-		dispatch(setSearchValue(e.target.value))
-		if (e.target.value === '') {
-			navigate('/')
-		} else {
- 			navigate('/search')
-		} 
+		getSearch(e.target.value)
 	};
+
 	const handleLogOut = () => {
-		console.log('+');
+		 
         dispatch(logOut());
 		localStorage.removeItem('access')
 		localStorage.removeItem('refresh')
@@ -36,27 +45,22 @@ export const Header = () => {
 			<NavLink to={`/`} style={{ textDecoration: "none" }}>
 				<div className="header-logo" onClick={() => { dispatch(setCurrentPage(1))}}>Pixema</div>
 			</NavLink>
-			<form action="#" className="search">
+			<div className="search">
 				<input
 					className={"header-input"}
 					type={"text"}
 					placeholder={"search"}
 					value={text}
 					onChange={(e) => handleChange(e)}
-					onKeyDown={(e) => {
-						if (e.key === 'Enter') {
-							dispatch(setSearchValue(text))
-							console.log(text)
-						}
-					}}
+					
 				/>
 				<SearchIcon onClick={() => {
 					
 						dispatch(setSearchValue(''))
 						navigate('/');
-
+ 
 					}} />
-			</form>
+			</div>
 			<div>
 				
 				{authorizedUserName !==''?<><UserAvatar username={`authorizedUserName`} location='header'/> <Button

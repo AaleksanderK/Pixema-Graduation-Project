@@ -1,0 +1,55 @@
+.select-wrapper {
+    width: 250px;
+    position: relative;
+    height: 38px;
+    color: #444;
+    background-color: rgba(128, 128, 128, 0.027);
+    border:none;
+    border-radius: 0;
+    margin-top: 100px;
+}
+.select{
+    font-size: 20px;
+    color:white;
+    border: none;
+    outline: none;
+    
+    &:root{
+        --swiper-theme-color: red;
+    }
+}
+.select-wrapper > select {
+    color: rgb(170, 168, 168);
+    width: 100%;
+    height: 37px;
+    
+	background: rgb(32, 32, 32);
+
+    border: 0;
+    appearance: none;
+    z-index: 1;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+ 
+
+.select-wrapper > select::-ms-expand{
+    display: none;
+    border: none;
+	background-color: rgba(128, 128, 128, 0.027);
+}
+.select-arrow {
+    position: absolute;
+    z-index: 1;
+    border: 8px solid transparent;
+    border-bottom: 0;
+    right: 11px;
+}
+.select-arrow:nth-child(2) {
+    top: 15px;
+    border-top-color: rgba(137, 43, 226, 0.582);;
+}
+.select-arrow:nth-child(3) {
+    top: 15px;
+    border-top-color: rgba(137, 43, 226, 0.582);;
+}

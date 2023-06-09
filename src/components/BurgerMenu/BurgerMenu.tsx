@@ -1,6 +1,5 @@
-import { useState, useContext } from "react";
+import { useState  } from "react";
 import './burgerMenu.scss'
-import { NavLink } from "react-router-dom";
 import { SideBar } from "../SideBar/SideBar";
 
 const BurgerMenu = () => {

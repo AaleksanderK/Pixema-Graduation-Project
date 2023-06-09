@@ -1,6 +1,13 @@
 .main-container{
     max-width: 1240px;
     margin: 0 auto;
-    // background-color: red;
+    
 }
 
+.main-container-select{
+    display: flex;
+    justify-content: space-between;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}

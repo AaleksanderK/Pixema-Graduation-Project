@@ -26,6 +26,7 @@ export const SignIn = () => {
 				isEnable={true}
 				isEmpty={emailText === "" ? true : false}
 				isValid={true}
+				
 			/>
 
 			<Input
@@ -47,7 +48,7 @@ export const SignIn = () => {
             <Button
                 className={"button button-sign"}
                 content="Sign In"
-                isActive={true}
+               
 				callback={() => {
 					dispatch(signIn({
 						"email":emailText, 

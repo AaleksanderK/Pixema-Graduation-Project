@@ -1,49 +1,94 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { IMovieCard, IStoreState } from "../../../type";
-// import { mockDataMovie } from "../../../constants";
-import { useParams } from "react-router-dom";
+
+import {  useNavigate, useParams } from "react-router-dom";
 import "./selectedMovie.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { loadSelectedPost } from "../../../redux/action-creators/movie-action-creators";
-import { join } from "path";
+import {
+	loadSelectedPost,
+	loadSelectedTrailer,
+	loadSimilarMovie,
+} from "../../../redux/action-creators/movie-action-creators";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/effect-flip";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import { Navigation, Pagination, Autoplay } from "swiper";
+import { SelectedVideo } from "../SelectedVideo/SelectedVideo";
+
 export const SelectedMovie = () => {
-	// const [movieObj, setMovieObj] = useState<IMovieCard | null>(null);
-	// const [index, setIndex] = useState<number>(-1);
-	// const { movieId } = useParams();
-	// useEffect(() => {
-	// 	const idx = mockDataMovie.findIndex((el) => String(el.id) === movieId);
-	// 	setIndex(idx);
-
-	// 	if (idx >= 0) {
-	// 		setMovieObj(mockDataMovie[idx]);
-	// 	}
-	// }, [movieId]);
-	// if (!movieObj) {
-	// 	return null;
-	// }
-	// const allMovies = useSelector((state: IStoreState) => state.movies.movies)
 	const { movieId } = useParams<{ movieId: string }>();
-	const movieObj = useSelector((state: IStoreState) => state.movies.selectedPost)
-	const dispatch = useDispatch()
+	const movieObj = useSelector(
+		(state: IStoreState) => state.movies.selectedPost
+	);
+	const movieSimilarObj = useSelector(
+		(state: IStoreState) => state.movies.similarMovies
+	);
+ 
+	const navigate = useNavigate();
+ 
+	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(loadSelectedPost(movieId!))
-}, [])
-
+		dispatch(loadSelectedTrailer(movieId!));
+		dispatch(loadSelectedPost(movieId!));
+		dispatch(loadSimilarMovie(movieId!));
+	}, [navigate]);
 
 	return (
-		<div className="container">
-
+		<div key={movieId} className="container">
 			<div className="selected-movie-container">
-				<img className="selected-movie-image" src={`http://image.tmdb.org/t/p/w300${movieObj.poster_path}`} alt="logo" />
-			
-                <div className="selected-movie-text-container">
-                    <h1 className="selected-title">{movieObj.title}</h1>
-                    <p className="selected-text"><b className="strong-text">year:</b> {movieObj.release_date}</p>
-                    <p className="selected-text"><b className="strong-text">country:</b> {movieObj.country}</p>{" "}
-					{/* <p className="selected-text"><b className="strong-text">genre:</b> {movieObj.genres.map((e) => e.name)}</p> */}
-					<p className="selected-text"><b className="strong-text">description:</b> {movieObj.overview}</p>
-                </div>
+				<img
+					className="selected-movie-image"
+					src={`http://image.tmdb.org/t/p/w300${movieObj.poster_path}`}
+					alt="logo"
+				/>
+				 
+				<SelectedVideo/>
 			</div>
-		</div>
+			<div className="selected-movie-text-container">
+				<h1 className="selected-title">{movieObj.title}</h1>
+				<p className="selected-text">
+					<b className="strong-text">year:</b> {movieObj.release_date}
+				</p>
+				<p className="selected-text">
+					<b className="strong-text">country:</b> {movieObj.country}
+				</p>
+				<p className="selected-text">
+					<b className="strong-text">description:</b> {movieObj.overview}
+				</p>
+				<p className="selected-text">
+					<b className="strong-text">rating:</b> {movieObj.vote_average}
+				</p>
+			</div>
+
+			<div className="slider-container">
+				<div className="similar-title-container">
+					<h2 className="similar-title">Similar movies</h2>
+				</div>
+				<Swiper
+					modules={[Navigation, Pagination, Autoplay]}
+					spaceBetween={10}
+					loop={true}
+					slidesPerView={4}
+					autoplay={{ delay: 2000 }}
+					navigation
+					pagination={{ clickable: true }}
+
+				>
+					{movieSimilarObj.map((el: IMovieCard) => (
+						<SwiperSlide>
+							<img
+								className="slide"
+								src={`http://image.tmdb.org/t/p/w300${el.poster_path}`}
+								alt=""
+								onClick={() => navigate(`/movie/${el.id}`)}
+							/>
+						</SwiperSlide>
+					))}
+				</Swiper>
+			</div>
+
+ 		</div>
 	);
 };

@@ -4,10 +4,10 @@ import "swiper/css";
 import "swiper/css/effect-flip";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { Navigation, Pagination, Scrollbar, A11y,  } from "swiper";
-import { IMovieCard, IStoreState, MoviesProps } from "../../type";
+import { Navigation, Pagination,  Autoplay,  } from "swiper";
+import { IMovieCard, IStoreState,  } from "../../type";
 import { FC, useEffect } from "react";
-import { MovieCard } from "../MovieCard/MovieCard";
+ 
 import { useDispatch, useSelector } from "react-redux";
 import { loadMovie } from "../../redux/action-creators/movie-action-creators";
 
@@ -16,20 +16,22 @@ export const Slider = () => {
 	const limit = useSelector((state: IStoreState) => state.movies.limit)
 	const dispatch = useDispatch();
 	useEffect(() => {
-	//   dispatch(setPosts(mockDataPosts))
+ 
 	dispatch(loadMovie({ limit }))
-	}, [limit]);
+	}, []);
 
 	return (
 		<div className="slider-container">
 			<Swiper
-				modules={[Navigation, Pagination,  A11y]}
+				modules={[Navigation, Pagination, Autoplay,] }
 				spaceBetween={10}
+				loop={true}
 				slidesPerView={4}
+				autoplay={{delay: 1000}}
 				navigation  
 				pagination={{ clickable: true }}
-				// onSwiper={(swiper) => console.log(swiper)}
-				// onSlideChange={() => console.log("slide change")}
+				
+		 
 			>
 				{data.map((el: IMovieCard) => <SwiperSlide ><img className="slide" src={ `http://image.tmdb.org/t/p/w300${el.poster_path}`} alt="" /></SwiperSlide>)}
  
@@ -37,3 +39,5 @@ export const Slider = () => {
 		</div>
 	);
 };
+ 
+

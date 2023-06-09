@@ -32,7 +32,6 @@ nav {
 
 .menu {
     display: flex;
-    background-color: white;
     position: absolute;
     z-index: 1;
 left: 60px; 
@@ -43,8 +42,7 @@ left: 60px;
 .hidden {
     display: none;
     transition: ease-out 0.5s;
-    // width: 100px;
-    // height: 100px;
+ 
  
 }
 
