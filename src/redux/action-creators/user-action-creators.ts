@@ -82,7 +82,7 @@ function* getUserData() {
 function* signUpUser(action: any) {
 	const { user } = action;
 	const URL = `https://studapi.teachmeskills.by/auth/users/`;
-	const resp: Response = yield fetch(URL, {
+	yield fetch(URL, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -116,7 +116,7 @@ function* signInUser(action: any) {
 function* resetUserPassword(action: any) {
 	const { email } = action;
 	const URL = `https://studapi.teachmeskills.by/auth/users/reset_password/`;
-	const resp: Response = yield fetch(URL, {
+	yield fetch(URL, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -134,7 +134,7 @@ const activate = (auth: IAuthorizeData) => {
 
 function* fetchActivate(action: any) {
 	const URL = `https://studapi.teachmeskills.by/auth/users/activation/`;
-	const resp: Response = yield fetch(URL, {
+	yield fetch(URL, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
