@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./header.scss";
 import { Button } from "../Button/Button";
 import { NavLink, useNavigate } from "react-router-dom";
