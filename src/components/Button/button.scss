@@ -1,0 +1,25 @@
+.button{
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+    border:none;
+    border-radius: 20px;
+    transition: 0.3s;
+    margin-left: 15px;
+
+}
+
+.button-submit{
+    background-color: rgba(137, 43, 226, 0.582);
+    color:#fff;
+    outline: 0;
+    
+}
+
+.button:hover, .button-submit:hover{
+    background-color: rgba(137, 43, 226, 0.897);
+    color: white;
+    
+    transform: scale(1.1);
+    transition: 0.3s;
+    cursor: pointer;
+}
